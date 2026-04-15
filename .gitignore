@@ -1,0 +1,4 @@
+build/
+dist/
+ShenaniganRanchInstaller.spec
+__pycache__/
