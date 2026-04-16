@@ -68,6 +68,29 @@ build.bat
 
 The output executable is written to `dist\ShenaniganRanchInstaller.exe`.
 
+### Signing With A Public Certificate
+
+`build.bat` supports signing with a public code-signing certificate exported as a `.pfx`.
+
+Set these environment variables before running the build:
+
+- `SIGN_PFX_PATH`: full path to your `.pfx` file
+- `SIGN_PFX_PASSWORD`: password for the `.pfx` (optional if your cert does not require one)
+
+Example:
+
+```powershell
+$env:SIGN_PFX_PATH = "C:\certs\company-codesign.pfx"
+$env:SIGN_PFX_PASSWORD = "your-password"
+build.bat
+```
+
+Notes:
+
+- `signtool.exe` must be available in `PATH` (typically from Windows SDK).
+- The script applies a SHA-256 timestamp using DigiCert so the signature remains valid after cert expiration.
+- If `SIGN_PFX_PATH` is not set, the script falls back to the self-signed development certificate flow.
+
 ## Windows Apps Uninstall Entry
 
 The installer stores its uninstall registration under:
